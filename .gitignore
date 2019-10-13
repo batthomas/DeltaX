@@ -1,0 +1,18 @@
+### Python
+build/
+dist/
+__pycache__/
+*.pyc
+db.sqlite3
+
+
+### JetBrains
+.idea/
+*.iml
+*.ipr
+*.iws
+coverage/
+
+
+### Visual Studio Code
+.vscode/
