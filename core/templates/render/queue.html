@@ -1,0 +1,31 @@
+{% extends "fragments/base.html" %}
+{% load task_filters %}
+
+{% block title %}Render Queue - {{ block.super }}{% endblock %}
+
+{% block import %}
+    <script src="https://cdn.jsdelivr.net/npm/sortablejs@latest/Sortable.min.js"></script>
+{% endblock %}
+
+{% block content %}
+    <h1>Render Queue</h1>
+
+    <div id="sortable">
+        {% for task in queue %}
+            <div class="small-card">
+                <h6>{{ task.task }}</h6>
+            </div>
+        {% empty %}
+            <h6 class="text-muted">No tasks loaded</h6>
+        {% endfor %}
+    </div>
+
+    <a href="{% url "render_render" %}" class="btn btn-primary">Submit</a>
+
+    <script>
+        sortable = document.getElementById("sortable");
+        new Sortable(sortable, {
+            animation: 150
+        });
+    </script>
+{% endblock %}

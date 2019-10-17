@@ -1,0 +1,19 @@
+{% extends "fragments/base.html" %}
+{% load task_filters %}
+
+{% block title %}Render Document - {{ block.super }}{% endblock %}
+
+{% block content %}
+    <h1>Render Document</h1>
+
+    <div class="card">
+        <h6>{{ queue|length }} tasks to render</h6>
+    </div>
+
+    <form action="" method="post" autocomplete="off">
+        {% csrf_token %}
+        <div class="form-group">
+            <input type="submit" value="Render" class="btn btn-primary">
+        </div>
+    </form>
+{% endblock %}

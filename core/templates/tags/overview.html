@@ -1,0 +1,41 @@
+{% extends "fragments/base.html" %}
+{% load static %}
+
+{% block title %}Tags - {{ block.super }}{% endblock %}
+
+{% block content %}
+    <h1>Tags</h1>
+    <div class="row">
+        <div class="col">
+            {% for tag in tags %}
+                <div class="card p-3">
+                    <!-- TODO: Multiline Ellipsis and Margin -->
+                    <div class="">
+                        <a href="{% url "tags_details" tag.pk %}" class="badge badge-primary">{{ tag.tag }}</a>
+                        <span>×</span>
+                        <span>{{ tag.tasks.count }}</span>
+                    </div>
+                    {{ tag.description }}
+                </div>
+                <br>
+            {% endfor %}
+        </div>
+        <div class="col-lg-3">
+
+            {% if  request.user.is_authenticated %}
+                <a href="#" class="btn btn-primary btn-block" role="button">Create new Tag (soon)</a>
+            {% endif %}
+            <br>
+            <div class="card">
+                <h6 class="card-header">
+                    Filter
+                </h6>
+                <div class="card-body">
+                    <small class="text-muted">coming soon.</small>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+{% endblock %}

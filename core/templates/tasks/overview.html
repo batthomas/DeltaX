@@ -1,0 +1,50 @@
+{% extends "fragments/base.html" %}
+{% load task_filters %}
+
+{% block title %}Tasks - {{ block.super }}{% endblock %}
+
+{% block content %}
+    <h1>All Tasks</h1>
+
+    <div class="row">
+
+        <div class="col">
+
+            {% for task in tasks %}
+                <div class="card">
+                    <div class="card-header">
+                        <small class="text-muted">{{ task.user.first_name }} {{ task.user.last_name }}</small>
+                    </div>
+                    <div class="card-body">
+                        <p><a href="{% url "tasks_details" task.pk %}">{{ task.task }}</a></p>
+                    </div>
+                    <div class="card-footer">
+                        <p class="card-text"><small class="text-muted">{{ task.created|timesince|upto:"," }} ago</small>
+                        </p>
+                    </div>
+                </div>
+                <br>
+            {% endfor %}
+            {% include "fragments/paginator.html" with paginator=tasks %}
+
+        </div>
+
+        <div class="col-xl-3 d-none d-xl-block">
+            {% if  request.user.is_authenticated %}
+                <a href="{% url "tasks_createtask" %}" class="btn btn-primary btn-block" role="button">Create new
+                    Task</a>
+                <br>
+            {% endif %}
+            <div class="card">
+                <h6 class="card-header">
+                    Filter
+                </h6>
+                <div class="card-body">
+                    <small class="text-muted">coming soon.</small>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+{% endblock %}

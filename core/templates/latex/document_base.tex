@@ -1,0 +1,26 @@
+\documentclass[a4paper,12pt]{article}
+
+\usepackage{amssymb}
+\usepackage{amsmath}
+
+\begin{document}
+
+\section*{Aufgaben}
+(% for task in tasks %)
+    \noindent
+    (( loop.index )). (( task.task )) \\
+(% else %)
+    (( "No Tasks loaded" ))
+(% endfor %)
+
+\newpage
+
+\section*{Lösungen}
+(% for task in tasks %)
+    \noindent
+    (( loop.index )). (( task.answer )) \\
+(% else %)
+    (( "No Solutions loaded" ))
+(% endfor %)
+
+\end{document}

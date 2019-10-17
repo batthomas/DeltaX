@@ -1,0 +1,82 @@
+{% extends "fragments/base_empty.html" %}
+{% load static %}
+
+{% block title %}Viewer - {{ block.super }}{% endblock %}
+
+{% block import %}
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.48.4/codemirror.min.js"
+            integrity="sha256-dPTL2a+npIonoK5i0Tyes0txCMUWZBf8cfKRfACRotc=" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.48.4/mode/stex/stex.min.js"
+            integrity="sha256-GBFcFtqVTcuzHk2XgNh2wmP20n67iplTCnJBj7+dt+s=" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.48.4/codemirror.min.css"
+          integrity="sha256-vZ3SaLOjnKO/gGvcUWegySoDU6ff33CS5i9ot8J9Czk=" crossorigin="anonymous"/>
+{% endblock %}
+
+{% block content %}
+    <nav class="navbar navbar-expand navbar-light justify-content-between mb-0">
+        <div class="container">
+            <a class="navbar-brand" href="{% url "tasks_overview" %}">
+                <img width="24" height="24" src="{% static "tasks/img/logo.png" %}" alt="">
+            </a>
+
+            <div class="navbar-nav tab-nav mx-auto">
+                <a class="nav-link active" id="tab-pdf" href="#pdf" data-toggle="tab">PDF</a>
+                <span class="nav-link">/</span>
+                <a class="nav-link" id="tab-latex" href="#latex" data-toggle="tab">LaTeX</a>
+            </div>
+
+            <ul class="navbar-nav">
+                <li class="nav-item dropdown">
+                    <a href="" class="material-icons nav-link" data-toggle="dropdown">more_vert</a>
+                    <div class="dropdown-menu dropdown-menu-right profile-dropdown">
+                        <h6 class="dropdown-header">Document</h6>
+                        <a class="dropdown-item"
+                           href="data:application/pdf;base64,{{ pdf }}"
+                           download="document.pdf">Download PDF</a>
+                        <a class="dropdown-item"
+                           href="data:application/x-tex;,{{ latex }}"
+                           download="document.tex">Download LaTeX</a>
+                    </div>
+                </li>
+            </ul>
+
+
+        </div>
+    </nav>
+
+    <div class="tab-content">
+        <div class="tab-pane active" id="pdf" style="height: calc(100vh - 56px)">
+            <embed style="border: 0; width: 100%; height: 100%" type="application/pdf"
+                   src="data:application/pdf;base64,{{ pdf }}">
+        </div>
+        <div class="tab-pane" id="latex">
+            <textarea id="code-area" style="height: calc(100vh -  56px);width: 100%">
+                {{ latex }}
+            </textarea>
+        </div>
+    </div>
+
+    <script>
+        let textArea = document.getElementById("code-area");
+        let codeMirror = CodeMirror.fromTextArea(textArea, {
+            mode: "text/x-stex",
+            lineNumbers: true,
+            inMathMode: true
+        });
+
+        $(".tab-nav > a").on("shown.bs.tab", function (e) {
+            $(this).siblings().removeClass("active");
+            codeMirror.refresh();
+        });
+    </script>
+
+    <style>
+        .navbar {
+            z-index: 10;
+        }
+
+        .CodeMirror {
+            height: calc(100vh - 56px);
+        }
+    </style>
+{% endblock %}

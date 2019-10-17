@@ -1,0 +1,47 @@
+{% extends "fragments/base.html" %}
+{% load static %}
+{% load task_filters %}
+
+{% block title %}{{ tag.tag }} - {{ block.super }}{% endblock %}
+
+{% block content %}
+    <h1>[{{ tag.tag }}]</h1>
+    <small class="text-muted">{{ tag.description }}</small>
+    <br><br>
+
+    <div class="row">
+
+        <div class="col">
+            {% for task in tasks %}
+                <div class="card">
+                    <div class="card-header">
+                        <small class="text-muted">{{ task.user.first_name }} {{ task.user.last_name }}</small>
+                    </div>
+                    <div class="card-body">
+                        <p><a href="{% url "tasks_details" task.pk %}">{{ task.task }}</a></p>
+                    </div>
+                    <div class="card-footer">
+                        <p class="card-text"><small class="text-muted">{{ task.created|timesince|upto:"," }} ago</small>
+                        </p>
+                    </div>
+                </div>
+                <br>
+            {% endfor %}
+
+            {% include "fragments/paginator.html" with paginator=tasks %}
+        </div>
+
+        <div class="col-lg-3">
+            <div class="card">
+                <h6 class="card-header">
+                    Filter
+                </h6>
+                <div class="card-body">
+                    <small class="text-muted">coming soon.</small>
+                </div>
+            </div>
+            <br>
+        </div>
+
+    </div>
+{% endblock %}
