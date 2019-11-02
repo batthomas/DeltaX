@@ -26,11 +26,12 @@ class RenderView(AuthenticationRequiredMixin, View):
             for tid in request.session.get("queue"):
                 queue.append(Task.objects.get(pk=tid))
         document = LatexDocument(queue)
-        latex = document.generate_latex()
-        pdf = document.generate_pdf()
+        latex = document.latex
+        pdf, log = document.generate_pdf()
         return render(request, self.viewer_template, {
             "latex": latex,
-            "pdf": base64.b64encode(pdf).decode()
+            "pdf": base64.b64encode(pdf).decode(),
+            "log": log.decode()
         })
 
 

@@ -5,6 +5,7 @@
 {% block title %}Create Task{% endblock %}
 
 {% block import %}
+    <script src="{% static "core/js/createtask.js" %}"></script>
     {{ form.media.css }}
     {{ form.media.js }}
     <style>
@@ -20,33 +21,61 @@
 
     <div class="row">
         <div class="col">
-                <form action="" method="post" autocomplete="off" class="card p-4">
-                    {% csrf_token %}
-                    <div class="form-group">
-                        <label for="id_question">Question</label>
-                        {{ form.question|addclass:"form-control" }}
-                    </div>
-                    <div class="form-group">
-                        <label for="id_approach">Approach</label>
-                        {{ form.approach|addclass:"form-control" }}
-                    </div>
-                    <div class="form-group">
-                        <label for="id_answer">Answer</label>
-                        {{ form.answer|addclass:"form-control" }}
-                    </div>
-                    <div class="form-group">
-                        <label for="id_tags">Tags</label>
-                        {{ form.tags|addclass:"form-control" }}
-                    </div>
-                </form>
+            <form id="create-form" action="" method="post" autocomplete="off" class="card p-4">
+                {% csrf_token %}
+                <div class="form-group">
+                    <label for="id_question">Question</label>
+                    {{ form.question|addclass:"form-control" }}
+                </div>
+                <div class="form-group">
+                    <label for="id_approach">Approach</label>
+                    {{ form.approach|addclass:"form-control" }}
+                </div>
+                <div class="form-group">
+                    <label for="id_answer">Answer</label>
+                    {{ form.answer|addclass:"form-control" }}
+                </div>
+                <div class="form-group">
+                    <label for="id_source">Source</label>
+                    {{ form.source|addclass:"form-control" }}
+                </div>
+                <div class="form-group">
+                    <label for="id_tags">Tags</label>
+                    {{ form.tags|addclass:"form-control" }}
+                </div>
+            </form>
 
-                <br>
+            <br>
         </div>
         <div class="col-lg-3">
-            <button class="btn btn-outline-primary btn-block">Preview</button>
-            <input type="submit" value="Submit" class="btn btn-primary btn-block">
+            <button class="btn btn-outline-primary btn-block"
+                    id="preview-task"
+                    data-toggle="modal"
+                    data-target="#preview">Preview
+            </button>
+            <input type="submit" value="Submit" form="create-form" class="btn btn-primary btn-block">
         </div>
     </div>
 
+    <div class="modal" tabindex="-1" role="dialog" id="preview">
+        <div class="modal-dialog modal-lg" role="document">
+            <div class="modal-content">
+                <div class="modal-header d-flex justify-content-between align-items-center">
+                    <h5 class="modal-title">Preview</h5>
+                    <button type="button" class="close material-icons" data-dismiss="modal">close</button>
+                </div>
+                <div class="modal-body">
+                    <h6>Question</h6>
+                    <p id="question-preview"></p>
+                    <hr>
+                    <h6>Approach</h6>
+                    <p id="approach-preview"></p>
+                    <hr>
+                    <h6>Answer</h6>
+                    <p id="answer-preview"></p>
+                </div>
+            </div>
+        </div>
+    </div>
 
 {% endblock %}

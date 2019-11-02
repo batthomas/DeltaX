@@ -16,13 +16,15 @@
     <nav class="navbar navbar-expand navbar-light justify-content-between mb-0">
         <div class="container">
             <a class="navbar-brand" href="{% url "tasks_overview" %}">
-                <img width="24" height="24" src="{% static "tasks/img/logo.png" %}" alt="">
+                <img width="24" height="24" src="{% static "core/img/logo.png" %}" alt="">
             </a>
 
             <div class="navbar-nav tab-nav mx-auto">
                 <a class="nav-link active" id="tab-pdf" href="#pdf" data-toggle="tab">PDF</a>
                 <span class="nav-link">/</span>
                 <a class="nav-link" id="tab-latex" href="#latex" data-toggle="tab">LaTeX</a>
+                <span class="nav-link">/</span>
+                <a class="nav-link" id="tab-log" href="#log" data-toggle="tab">Log</a>
             </div>
 
             <ul class="navbar-nav">
@@ -50,23 +52,34 @@
                    src="data:application/pdf;base64,{{ pdf }}">
         </div>
         <div class="tab-pane" id="latex">
-            <textarea id="code-area" style="height: calc(100vh -  56px);width: 100%">
-                {{ latex }}
-            </textarea>
+            <label for="latex-area" style="display: none"></label>
+            <textarea id="latex-area" style="height: calc(100vh -  56px);width: 100%">{{ latex }}</textarea>
+        </div>
+        <div class="tab-pane" id="log">
+            <label for="log-area" style="display: none"></label>
+            <textarea id="log-area" style="height: calc(100vh -  56px);width: 100%">{{ log }}</textarea>
         </div>
     </div>
 
     <script>
-        let textArea = document.getElementById("code-area");
-        let codeMirror = CodeMirror.fromTextArea(textArea, {
+        let latexArea = document.getElementById("latex-area");
+        let latexCode = CodeMirror.fromTextArea(latexArea, {
             mode: "text/x-stex",
             lineNumbers: true,
-            inMathMode: true
+            autoRefresh: true
+        });
+        let logArea = document.getElementById("log-area");
+        let logCode = CodeMirror.fromTextArea(logArea, {
+            mode: "text/x-stex",
+            lineNumbers: true,
+            autoRefresh: true,
+            readOnly: true
         });
 
         $(".tab-nav > a").on("shown.bs.tab", function (e) {
             $(this).siblings().removeClass("active");
-            codeMirror.refresh();
+            latexCode.refresh();
+            logCode.refresh();
         });
     </script>
 

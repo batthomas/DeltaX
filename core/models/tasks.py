@@ -7,5 +7,6 @@ class Task(models.Model):
     answer = models.TextField()
     tags = models.ManyToManyField("Tag", related_name="tasks")
     user = models.ForeignKey("UserProfile", related_name="tasks", on_delete=models.PROTECT)
+    source = models.TextField(default=None, blank=True, null=True)
     updated = models.DateTimeField(auto_now=True)
     created = models.DateTimeField(auto_now_add=True)

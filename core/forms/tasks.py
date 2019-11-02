@@ -22,4 +22,5 @@ class CreateTaskForm(forms.Form):
     question = forms.CharField(widget=forms.Textarea)
     approach = forms.CharField(widget=forms.Textarea)
     answer = forms.CharField(widget=forms.Textarea)
+    source = forms.CharField()
     tags = forms.ModelMultipleChoiceField(queryset=Tag.objects.all(), widget=BootstrapSelect2MultipleWidget)

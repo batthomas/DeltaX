@@ -7,9 +7,9 @@
     <h1>Render Document</h1>
 
     <div class="card">
-        <h6>{{ queue|length }} tasks to render</h6>
+        <h6 class="p-3">{{ queue|length }} tasks to render</h6>
     </div>
-
+    <br>
     <form action="" method="post" autocomplete="off">
         {% csrf_token %}
         <div class="form-group">

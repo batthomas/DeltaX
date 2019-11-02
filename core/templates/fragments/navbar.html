@@ -5,7 +5,7 @@
     <nav class="navbar navbar-expand-md navbar-light justify-content-between">
         <div class="container">
             <a class="navbar-brand" href="{% url "tasks_overview" %}">
-                <img width="24" height="24" src="{% static "tasks/img/logo.png" %}" alt="">
+                <img width="24" height="24" src="{% static "core/img/logo.png" %}" alt="">
             </a>
 
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbar-content">
@@ -17,7 +17,7 @@
 
                 <ul class="navbar-nav">
                     <li class="nav-item dropdown d-none d-sm-none d-md-block">
-                        <a href="{% url "render_queue" %}" class="material-icons nav-link">inbox</a>
+                        <a href="{% url "render_render" %}" class="material-icons nav-link">inbox</a>
                     </li>
                     <li class="nav-item dropdown d-none d-sm-none d-md-block">
                         <a href="" class="material-icons nav-link" data-toggle="dropdown">person</a>
@@ -29,7 +29,7 @@
                     </li>
 
                     <li class="nav-item dropdown d-sm-block d-block d-md-none">
-                        <a href="{% url "render_queue" %}" class="nav-link">Render Queue</a>
+                        <a href="{% url "render_render" %}" class="nav-link">Render</a>
                         <a href="#" class="nav-link">Profile</a>
                         <a href="{% url "auth_logout" %}" class="nav-link">Logout</a>
                     </li>
@@ -43,7 +43,7 @@
     <nav class="navbar navbar-expand-md navbar-light">
         <div class="container">
             <a class="navbar-brand" href="{% url "tasks_overview" %}">
-                <img width="24" height="24" src="{% static "tasks/img/logo.png" %}" alt="">
+                <img width="24" height="24" src="{% static "core/img/logo.png" %}" alt="">
             </a>
 
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbar-content">

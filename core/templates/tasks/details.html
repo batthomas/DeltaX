@@ -61,12 +61,13 @@
         <div class="col-lg-3">
             <div class="card p-3">
                 <h6>{{ task.user.first_name }} {{ task.user.last_name }}</h6>
-                <small class="text-muted">profile coming soon.</small>
+                <small class="text-muted">{{ task.created }}</small>
+                <br>
+                <small class="text-muted">more coming soon.</small>
             </div>
             <br>
-            <div class="card p-3">
-                <small class="text-muted">vote coming soon.</small>
-            </div>
+            <br>
+            <button class="btn btn-primary btn-block">Edit</button>
         </div>
 
 
